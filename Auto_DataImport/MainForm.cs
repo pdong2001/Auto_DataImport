@@ -9,12 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoItX3Lib;
-
 using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using DataTable = System.Data.DataTable;
 using KAutoHelper;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Auto_DataImport
 {
@@ -23,8 +23,21 @@ namespace Auto_DataImport
         public MainForm()
         {
             InitializeComponent();
+            StartHotKey();
         }
         DataTable data;
+
+        KeyLogger StopHotKey;
+        async Task StartHotKey()
+        {
+            StopHotKey = new KeyLogger(Keys.F5, () => { MessageBox.Show("Stopped"); });
+            Task taskHotKey = new Task(() =>
+            {
+                StopHotKey.Start();
+            });
+            taskHotKey.Start();
+            await taskHotKey;
+        }
 
         private void btnShowFileDialog_Click(object sender, EventArgs e)
         {
@@ -123,18 +136,25 @@ namespace Auto_DataImport
                 else
                 {
                     hWnd = temp[0].MainWindowHandle;
-                    var clienthWnd = AutoControl.FindHandles(hWnd, "WindowsForms10.MDICLIENT.app.0.265601d_r9_ad1", null);
+                    if (MessageBox.Show("Bán có chắc chắc muốn bắt đầu nhập?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    {
+                        MessageBox.Show("Bắt đầu nhập, nhấn F5 để hủy...");
+                    }
+                    else
+                    {
+                        return;
+                    }
                     AutoControl.BringToFront(hWnd);
 
                     for (int i = 0; i < 6; i++)
                     {
                         AutoControl.SendKeyFocus(KeyCode.ESC);
                     }
-                    var childhWnds = AutoControl.FindHandles(hWnd, "WindowsForms10.Window.8.app.0.265601d_r9_ad1", null);
+                    var childhWnds = AutoControl.FindHandles(hWnd, "WindowsForms10.Window.8.app.0.265601d_r7_ad1", "");
                     int buttonIndex = 0;
 
 
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(2500);
 
                     AutoControl.SendClickOnPosition(childhWnds[buttonIndex], 120, 15);
                     AutoControl.SendClickOnPosition(childhWnds[buttonIndex], 50, 50);
@@ -144,6 +164,10 @@ namespace Auto_DataImport
                         System.Threading.Thread.Sleep(1500);
                         for (int i = 1; i < data.Columns.Count; i++)
                         {
+                            if (StopHotKey.isHotKeyTriggered)
+                            {
+                                return;
+                            }
                             if (i != 4)
                             {
 

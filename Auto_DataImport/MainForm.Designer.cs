@@ -33,16 +33,16 @@ namespace Auto_DataImport
             this.btnShowFileDialog = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnImportStart = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // ofdGetExcel
@@ -53,10 +53,10 @@ namespace Auto_DataImport
             // btnShowFileDialog
             // 
             this.btnShowFileDialog.AutoSize = true;
-            this.btnShowFileDialog.Location = new System.Drawing.Point(712, 10);
-            this.btnShowFileDialog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnShowFileDialog.Location = new System.Drawing.Point(949, 12);
+            this.btnShowFileDialog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnShowFileDialog.Name = "btnShowFileDialog";
-            this.btnShowFileDialog.Size = new System.Drawing.Size(56, 23);
+            this.btnShowFileDialog.Size = new System.Drawing.Size(85, 33);
             this.btnShowFileDialog.TabIndex = 0;
             this.btnShowFileDialog.Text = "Browse";
             this.btnShowFileDialog.UseVisualStyleBackColor = true;
@@ -67,12 +67,12 @@ namespace Auto_DataImport
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 43);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 53);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(857, 312);
+            this.dataGridView1.Size = new System.Drawing.Size(1143, 384);
             this.dataGridView1.TabIndex = 1;
             // 
             // panel1
@@ -86,49 +86,37 @@ namespace Auto_DataImport
             this.panel1.Controls.Add(this.btnShowFileDialog);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(857, 43);
+            this.panel1.Size = new System.Drawing.Size(1143, 53);
             this.panel1.TabIndex = 2;
             // 
-            // btnImportStart
+            // label2
             // 
-            this.btnImportStart.AutoSize = true;
-            this.btnImportStart.Location = new System.Drawing.Point(9, 10);
-            this.btnImportStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnImportStart.Name = "btnImportStart";
-            this.btnImportStart.Size = new System.Drawing.Size(56, 23);
-            this.btnImportStart.TabIndex = 2;
-            this.btnImportStart.Text = "Start";
-            this.btnImportStart.UseVisualStyleBackColor = true;
-            this.btnImportStart.Click += new System.EventHandler(this.btnImportStart_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(417, 18);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Số dòng";
             // 
-            // textBox1
+            // label1
             // 
-            this.textBox1.Location = new System.Drawing.Point(571, 11);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(138, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(153, 13);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 3;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(120, 17);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 17);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Bắt đầu từ";
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(366, 13);
+            this.numericUpDown2.Location = new System.Drawing.Point(488, 16);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown2.Size = new System.Drawing.Size(160, 22);
             this.numericUpDown2.TabIndex = 3;
             this.numericUpDown2.Value = new decimal(new int[] {
             1,
@@ -137,39 +125,55 @@ namespace Auto_DataImport
             0});
             this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
-            // label1
+            // numericUpDown1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(90, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Bắt đầu từ";
+            this.numericUpDown1.Location = new System.Drawing.Point(204, 16);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(160, 22);
+            this.numericUpDown1.TabIndex = 3;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // label2
+            // btnImportStart
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(313, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Số dòng";
+            this.btnImportStart.AutoSize = true;
+            this.btnImportStart.Location = new System.Drawing.Point(12, 12);
+            this.btnImportStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnImportStart.Name = "btnImportStart";
+            this.btnImportStart.Size = new System.Drawing.Size(75, 33);
+            this.btnImportStart.TabIndex = 2;
+            this.btnImportStart.Text = "Start";
+            this.btnImportStart.UseVisualStyleBackColor = true;
+            this.btnImportStart.Click += new System.EventHandler(this.btnImportStart_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(761, 14);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(183, 22);
+            this.textBox1.TabIndex = 1;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 355);
+            this.ClientSize = new System.Drawing.Size(1143, 437);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "Auto Data Import";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
