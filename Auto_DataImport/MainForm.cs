@@ -23,18 +23,19 @@ namespace Auto_DataImport
         public MainForm()
         {
             InitializeComponent();
-            StartHotKey();
+            taskStopHotKey = StartHotKey();
         }
         DataTable data;
-
+        Task taskStopHotKey;
         KeyLogger StopHotKey;
+        CancellationTokenSource stopHotKeySource = new CancellationTokenSource();
         async Task StartHotKey()
         {
-            StopHotKey = new KeyLogger(Keys.F5, () => { MessageBox.Show("Stopped"); });
-            Task taskHotKey = new Task(() =>
+            StopHotKey = new KeyLogger(Keys.F5, () => { MessageBox.Show("Đã dừng lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly); });
+            Task taskHotKey = Task.Run(() =>
             {
                 StopHotKey.Start();
-            });
+            }, stopHotKeySource.Token);
             taskHotKey.Start();
             await taskHotKey;
         }
@@ -138,7 +139,8 @@ namespace Auto_DataImport
                     hWnd = temp[0].MainWindowHandle;
                     if (MessageBox.Show("Bán có chắc chắc muốn bắt đầu nhập?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                     {
-                        MessageBox.Show("Bắt đầu nhập, nhấn F5 để hủy...");
+                        MessageBox.Show("Bắt đầu nhập, nhấn F5 để hủy..."
+                            + Environment.NewLine + "Nếu xảy ra lỗi, tăng độ trễ và thử lại.");
                     }
                     else
                     {
@@ -153,15 +155,18 @@ namespace Auto_DataImport
                     var childhWnds = AutoControl.FindHandles(hWnd, "WindowsForms10.Window.8.app.0.265601d_r7_ad1", "");
                     int buttonIndex = 0;
 
+                    System.Threading.Thread.Sleep(200);
 
-                    System.Threading.Thread.Sleep(2500);
 
                     AutoControl.SendClickOnPosition(childhWnds[buttonIndex], 120, 15);
                     AutoControl.SendClickOnPosition(childhWnds[buttonIndex], 50, 50);
+
+                    System.Threading.Thread.Sleep(2000);
+
                     for (int j = (int)numericUpDown1.Value - 1; j < data.Rows.Count && j < +(int)numericUpDown1.Value + (int)numericUpDown2.Value - 1; j++)
                     {
                         AutoControl.SendKeyFocus(KeyCode.F3);
-                        System.Threading.Thread.Sleep(1500);
+                        System.Threading.Thread.Sleep(2000);
                         for (int i = 1; i < data.Columns.Count; i++)
                         {
                             if (StopHotKey.isHotKeyTriggered)
@@ -175,13 +180,13 @@ namespace Auto_DataImport
                                 {
                                     AutoControl.SendStringFocus(data.Rows[j][i].ToString());
                                 }
-                                System.Threading.Thread.Sleep(300);
+                                System.Threading.Thread.Sleep((int)numericUpDown3.Value);
                                 if (i == 7)
                                 {
                                     if (data.Rows[j][i].ToString().Trim().ToLower() == "nữ")
                                     {
                                         AutoControl.SendKeyFocus(KeyCode.RIGHT);
-                                        System.Threading.Thread.Sleep(300);
+                                        System.Threading.Thread.Sleep((int)numericUpDown3.Value);
                                     }
                                 }
                                 AutoControl.SendKeyFocus(KeyCode.TAB);
@@ -239,6 +244,11 @@ namespace Auto_DataImport
             {
                 numericUpDown2.Value = data.Rows.Count - numericUpDown1.Value + 1;
             }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            stopHotKeySource.Cancel();
         }
     }
 }
